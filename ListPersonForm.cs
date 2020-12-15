@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,13 +25,13 @@ namespace SpeakRec
             listViewPerson.View = View.Details;
             listViewPerson.GridLines = true;
             listViewPerson.FullRowSelect = true;
-            string[] arr = { "Hoàng", "Trường", "Hồ Tấn Hoàn" };
+            List<Person> listPerson = Utils.getListPerson();
+
             ListViewItem itm;
-            for (int i = 0; i < arr.Length; i++)
+            for (int i = 0; i < listPerson.Count; i++)
             {
                 itm = new ListViewItem(new string[] {
-                "",arr[i],"100",i+""
-                });
+                "",listPerson[i].name,listPerson[i].featured });
                 itm.Tag = i;
                 listViewPerson.Items.Add(itm);
             }
@@ -38,7 +39,7 @@ namespace SpeakRec
             {
                 try
                 {
-                    listViewPerson.Items[(int)item.Tag].Checked = item.Checked;
+                    listViewPerson.Items[(int)item.Tag].Checked = true;
                 }
                 catch (Exception)
                 {

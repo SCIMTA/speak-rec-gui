@@ -7,7 +7,7 @@ namespace SpeakRec
 {
     public partial class MainForm : Form
     {
-
+        public Recorder recorder;
         public string audioFile = "*.wav;*.aac;*.wma;*.wmv;*.mp3";
         public string[] videoFile =
         {
@@ -49,7 +49,7 @@ namespace SpeakRec
                     }
                 
                 labelSoundLength.Text = new AudioFileReader(filePath).TotalTime.ToString().Split('.')[0];
-                showSub.Enabled = true;
+                btnShowSub.Enabled = true;
             }
         }
 
@@ -73,6 +73,50 @@ namespace SpeakRec
         private void btnShowListPerson_Click(object sender, EventArgs e)
         {
             new ListPersonForm(this).ShowDialog();
+        }
+
+        private void btnAddPerson_Click(object sender, EventArgs e)
+        {
+            new AddPersonForm(this).ShowDialog();
+        }
+
+        private void btnRecord_Click(object sender, EventArgs e)
+        {
+            if (btnRecord.Text == "Ghi âm")
+            {
+                btnShowSub.Enabled = false;
+                btnExportText.Enabled = false;
+                btnOpenFile.Enabled = false;
+                btnRecord.Text = "Dừng";
+                string filePath = ".\\cache\\meeting\\";
+                string fileName = DateTime.Now.Ticks + ".wav";
+                recorder = new Recorder(0, filePath, fileName, labelSoundLength);
+                recorder.StartRecording();
+                labelFilePath.Text = filePath;
+                labelFileName.Text = fileName;
+                this.filePath = filePath + fileName;
+                string ext = fileName.Split('.')[1];
+                isVideo = false;
+                foreach (string str in videoFile)
+                    if (ext.Equals(str))
+                    {
+                        isVideo = true;
+                        break;
+                    }
+            }
+            else
+            {
+                StopRecord();
+            }
+        }
+
+        private void StopRecord()
+        {
+            recorder.RecordEnd();
+            btnShowSub.Enabled = true;
+            btnExportText.Enabled = true;
+            btnOpenFile.Enabled = true;
+            btnRecord.Text = "Ghi âm";
         }
     }
 }

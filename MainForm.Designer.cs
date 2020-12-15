@@ -38,7 +38,7 @@ namespace SpeakRec
             this.labelSoundLength = new System.Windows.Forms.Label();
             this.labelFilePath = new System.Windows.Forms.Label();
             this.labelFileName = new System.Windows.Forms.Label();
-            this.showSub = new System.Windows.Forms.Button();
+            this.btnShowSub = new System.Windows.Forms.Button();
             this.listPerson = new System.Windows.Forms.ListView();
             this.btnShowListPerson = new System.Windows.Forms.Button();
             this.btnAddPerson = new System.Windows.Forms.Button();
@@ -139,14 +139,14 @@ namespace SpeakRec
             // 
             // showSub
             // 
-            this.showSub.Enabled = false;
-            this.showSub.Location = new System.Drawing.Point(53, 450);
-            this.showSub.Name = "showSub";
-            this.showSub.Size = new System.Drawing.Size(114, 98);
-            this.showSub.TabIndex = 10;
-            this.showSub.Text = "Xem sub";
-            this.showSub.UseVisualStyleBackColor = true;
-            this.showSub.Click += new System.EventHandler(this.showSub_Click);
+            this.btnShowSub.Enabled = false;
+            this.btnShowSub.Location = new System.Drawing.Point(53, 450);
+            this.btnShowSub.Name = "showSub";
+            this.btnShowSub.Size = new System.Drawing.Size(114, 98);
+            this.btnShowSub.TabIndex = 10;
+            this.btnShowSub.Text = "Xem sub";
+            this.btnShowSub.UseVisualStyleBackColor = true;
+            this.btnShowSub.Click += new System.EventHandler(this.showSub_Click);
             // 
             // listPerson
             // 
@@ -175,6 +175,7 @@ namespace SpeakRec
             this.btnAddPerson.TabIndex = 13;
             this.btnAddPerson.Text = "Thêm người";
             this.btnAddPerson.UseVisualStyleBackColor = true;
+            this.btnAddPerson.Click += new System.EventHandler(this.btnAddPerson_Click);
             // 
             // ListSub
             // 
@@ -193,6 +194,7 @@ namespace SpeakRec
             this.btnRecord.TabIndex = 16;
             this.btnRecord.Text = "Ghi âm";
             this.btnRecord.UseVisualStyleBackColor = true;
+            this.btnRecord.Click += new System.EventHandler(this.btnRecord_Click);
             // 
             // btnExportText
             // 
@@ -214,7 +216,7 @@ namespace SpeakRec
             this.Controls.Add(this.btnShowListPerson);
             this.Controls.Add(this.btnAddPerson);
             this.Controls.Add(this.listPerson);
-            this.Controls.Add(this.showSub);
+            this.Controls.Add(this.btnShowSub);
             this.Controls.Add(this.labelSoundLength);
             this.Controls.Add(this.labelFilePath);
             this.Controls.Add(this.labelFileName);
@@ -245,7 +247,7 @@ namespace SpeakRec
         private System.Windows.Forms.Label labelSoundLength;
         private System.Windows.Forms.Label labelFilePath;
         private System.Windows.Forms.Label labelFileName;
-        private System.Windows.Forms.Button showSub;
+        private System.Windows.Forms.Button btnShowSub;
         public System.Windows.Forms.ListView listPerson;
         private System.Windows.Forms.Button btnShowListPerson;
         private System.Windows.Forms.Button btnAddPerson;

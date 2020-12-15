@@ -1,2 +1,1 @@
-# speak-rec-gui
-# speak-rec-gui
+- giải nén `VLC.rar` dùng 'extra here`

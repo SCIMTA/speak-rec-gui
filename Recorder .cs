@@ -28,11 +28,9 @@ namespace SpeakRec
             {
                 DeviceNumber = this.InputDeviceIndex,
                 WaveFormat =
-                    new WaveFormat(16000, 1 )
+                    new WaveFormat(16000, 1)
             };
-
             sourceStream.DataAvailable += this.SourceStreamDataAvailable;
-
             if (!Directory.Exists(FilePath))
             {
                 Directory.CreateDirectory(FilePath);

@@ -15,6 +15,8 @@ namespace SpeakRec
         public Recorder recorder;
         public string placeholder = "Nhập tên";
         private MainForm mainForm;
+        private string filePath;
+        private string fileName;
         public AddPersonForm(MainForm mainForm)
         {
             this.mainForm = mainForm;
@@ -26,8 +28,8 @@ namespace SpeakRec
            if(btnRecord.Text=="Ghi âm")
             {
                 btnRecord.Text = "Dừng";
-                string filePath = ".\\cache\\person\\";
-                string fileName = DateTime.Now.Ticks + ".wav";
+                filePath = ".\\cache\\person\\";
+                fileName = DateTime.Now.Ticks + ".wav";
                 recorder = new Recorder(0, filePath , fileName,lablelRec);
                 recorder.StartRecording();
             }
@@ -40,13 +42,7 @@ namespace SpeakRec
         private void StopRecord()
         {
             recorder.RecordEnd();
-            Utils.AddPerson(new Person(tbName.Text, "500"));
-            int lastIndex = Utils.getListPerson().Count;
-            ListViewItem itm = new ListViewItem(new string[] {
-                "",tbName.Text,"500"
-                });
-            itm.Tag = lastIndex - 1;
-            mainForm.listPerson.Items.Add(itm);
+            API.AddPerson("."+filePath+fileName,tbName.Text);
             btnRecord.Text = "Ghi âm";
             tbName.Text = String.Empty;
             lablelRec.Text = "00:00:00";

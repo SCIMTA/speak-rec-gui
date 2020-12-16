@@ -13,7 +13,7 @@ namespace SpeakRec
         {
             "dat", "wmv", "3g2", "3gp", "3gp2", "3gpp", "amv", "asf", "avi", "bin", "cue", "divx", "dv", "flv", "gxf", "iso", "m1v", "m2v", "m2t", "m2ts", "m4v", "mkv", "mov", "mp2", "mp2v", "mp4", "mp4v", "mpa", "mpe", "mpeg", "mpeg", "mpeg", "mpeg", "mpg", "mpv2", "mts", "nsv", "nuv", "ogg", "ogm", "ogv", "ogx", "ps", "rec", "rm", "rmvb", "tod", "ts", "tts", "vob", "vro", "webm"
         };
-        public string filePath;
+        public string filePath, fileName;
         public bool isVideo = false;
         public MainForm()
         {
@@ -26,7 +26,7 @@ namespace SpeakRec
             listPerson.FullRowSelect = true;
         }
 
-  
+
 
         private void btnOpenFile_Click(object sender, EventArgs e)
         {
@@ -36,7 +36,7 @@ namespace SpeakRec
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 this.filePath = dlg.FileName;
-                string fileName = filePath.Split('\\')[filePath.Split('\\').Length - 1];
+                fileName = filePath.Split('\\')[filePath.Split('\\').Length - 1];
                 labelFilePath.Text = filePath;
                 labelFileName.Text = fileName;
                 string ext = fileName.Split('.')[1];
@@ -47,7 +47,7 @@ namespace SpeakRec
                         isVideo = true;
                         break;
                     }
-                
+                API.GenSub(filePath);
                 labelSoundLength.Text = new AudioFileReader(filePath).TotalTime.ToString().Split('.')[0];
                 btnShowSub.Enabled = true;
             }
@@ -59,10 +59,10 @@ namespace SpeakRec
             System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
             startInfo.FileName = "cmd.exe";
-            string pathCmd="";
+            string pathCmd = "";
             pathCmd = '"' + filePath;
             pathCmd += '"';
-            string strCmdText =  @"/K ..\..\VLC\vlc.exe " + pathCmd;
+            string strCmdText = @"/K ..\..\VLC\vlc.exe " + pathCmd;
             if (!isVideo)
                 strCmdText += " --audio-visual=visual --effect-list=spectrum";
             startInfo.Arguments = strCmdText;
@@ -88,8 +88,8 @@ namespace SpeakRec
                 btnExportText.Enabled = false;
                 btnOpenFile.Enabled = false;
                 btnRecord.Text = "Dừng";
-                string filePath = ".\\cache\\meeting\\";
-                string fileName = DateTime.Now.Ticks + ".wav";
+                filePath = ".\\cache\\meeting\\";
+                fileName = DateTime.Now.Ticks + ".wav";
                 recorder = new Recorder(0, filePath, fileName, labelSoundLength);
                 recorder.StartRecording();
                 labelFilePath.Text = filePath;
@@ -113,6 +113,7 @@ namespace SpeakRec
         private void StopRecord()
         {
             recorder.RecordEnd();
+            API.GenSub("." + filePath);
             btnShowSub.Enabled = true;
             btnExportText.Enabled = true;
             btnOpenFile.Enabled = true;

@@ -19,6 +19,7 @@ namespace SpeakRec
         public string filePath, fileName;
         public bool isVideo = false;
         private int indexItemSubSelect;
+        private System.Diagnostics.Process process;
         public MainForm()
         {
             InitializeComponent();
@@ -34,9 +35,8 @@ namespace SpeakRec
             ListSub.View = View.Details;
             ListSub.GridLines = true;
             ListSub.FullRowSelect = true;
+            initServer();
         }
-
-
 
         private void btnOpenFile_Click(object sender, EventArgs e)
         {
@@ -64,6 +64,28 @@ namespace SpeakRec
             }
         }
 
+        private void initServer()
+        {
+            string cmdText = @"/C cd ./speak-rec/ && .\venv\Scripts\uvicorn.exe start_server:app";
+            process = new System.Diagnostics.Process();
+            System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+            startInfo.FileName = "cmd.exe";
+            startInfo.Arguments = cmdText;
+            process.StartInfo = startInfo;
+            process.Start();
+        }
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            try
+            {
+                process.CloseMainWindow();
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show(err.Message);
+            }
+        }
         private void showSub_Click(object sender, EventArgs e)
         {
             System.Diagnostics.Process process = new System.Diagnostics.Process();
@@ -73,7 +95,7 @@ namespace SpeakRec
             string pathCmd = "";
             pathCmd = '"' + filePath;
             pathCmd += '"';
-            string strCmdText = @"/K ..\..\VLC\vlc.exe " + pathCmd;
+            string strCmdText = @"/K .\VLC\vlc.exe " + pathCmd;
             if (!isVideo)
                 strCmdText += " --audio-visual=visual --effect-list=spectrum";
             startInfo.Arguments = strCmdText;
@@ -186,6 +208,8 @@ namespace SpeakRec
         {
             ListSub.Items[indexItemSubSelect].SubItems[2].Text = tbSub.Text;
         }
+
+       
 
         private void StopRecord()
         {

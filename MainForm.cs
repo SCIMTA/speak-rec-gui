@@ -1,5 +1,8 @@
 ﻿using NAudio.Wave;
+using SpeakRec.model;
 using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -15,6 +18,7 @@ namespace SpeakRec
         };
         public string filePath, fileName;
         public bool isVideo = false;
+        private int indexItemSubSelect;
         public MainForm()
         {
             InitializeComponent();
@@ -24,6 +28,12 @@ namespace SpeakRec
             listPerson.View = View.Details;
             listPerson.GridLines = true;
             listPerson.FullRowSelect = true;
+            ListSub.Columns.Add("Tên", 100);
+            ListSub.Columns.Add("Thời gian", 160);
+            ListSub.Columns.Add("Văn bản", 1000);
+            ListSub.View = View.Details;
+            ListSub.GridLines = true;
+            ListSub.FullRowSelect = true;
         }
 
 
@@ -47,9 +57,10 @@ namespace SpeakRec
                         isVideo = true;
                         break;
                     }
-                API.GenSub(filePath);
+                addSubToListSub(API.GenSub(filePath).path);
                 labelSoundLength.Text = new AudioFileReader(filePath).TotalTime.ToString().Split('.')[0];
                 btnShowSub.Enabled = true;
+                btnExportText.Enabled = true;
             }
         }
 
@@ -110,10 +121,77 @@ namespace SpeakRec
             }
         }
 
+        private void btnExportText_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog dlg = new SaveFileDialog();
+            dlg.Title = "Lưu file văn bản";
+            dlg.Filter = "Văn bản|*.txt;";
+            dlg.FileName = this.fileName.Split('.')[0];
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                string createText = "";
+                foreach (ListViewItem item in ListSub.Items)
+                    createText += item.SubItems[0].Text + ": " + item.SubItems[2].Text + "\n";
+                File.WriteAllText(dlg.FileName, createText);
+            }
+        }
+
+        private void addSubToListSub(string pathSub = @"C:\Users\hoang\Downloads\Buoc Qua Mua Co Don - Vu.srt")
+        {
+            string text = File.ReadAllText(pathSub);
+            ListSub.Items.Clear();
+            var arr = text.Split(new string[] { "\n\n" }, StringSplitOptions.None);
+            foreach (var item in arr)
+            {
+                try
+                {
+                    var subArr = item.Split('\n');
+                    var nameItem = "Không xác định";
+                    var textItem = subArr[2];
+                    if (subArr[2].Split(':').Length > 1)
+                    {
+                        nameItem = subArr[2].Split(':')[0];
+                        textItem = subArr[2].Split(':')[1];
+                    }
+                    ListViewItem itm = new ListViewItem(new string[] {
+                    nameItem, subArr[1], textItem
+                });
+                    ListSub.Items.Add(itm);
+                }
+                catch (Exception e)
+                {
+
+                }
+            }
+        }
+
+        private void ListSub_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        {
+            if (e.IsSelected)
+            {
+                indexItemSubSelect = e.ItemIndex;
+                tbName.Enabled = true;
+                tbSub.Enabled = true;
+                tbName.Text = e.Item.SubItems[0].Text;
+                tbSub.Text = e.Item.SubItems[2].Text;
+            }
+        }
+
+        private void tbName_TextChanged(object sender, EventArgs e)
+        {
+            ListSub.Items[indexItemSubSelect].SubItems[0].Text = tbName.Text;
+        }
+
+        private void tbSub_TextChanged(object sender, EventArgs e)
+        {
+            ListSub.Items[indexItemSubSelect].SubItems[2].Text = tbSub.Text;
+        }
+
         private void StopRecord()
         {
             recorder.RecordEnd();
             API.GenSub("." + filePath);
+            addSubToListSub(Path.GetFullPath(filePath.Replace("wav", "srt")));
             btnShowSub.Enabled = true;
             btnExportText.Enabled = true;
             btnOpenFile.Enabled = true;

@@ -80,7 +80,7 @@
     <Compile Include="LoadingForm.Designer.cs">
       <DependentUpon>LoadingForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="model\AddPerson.cs" />
+    <Compile Include="modelAPI\AddPerson.cs" />
     <Compile Include="AddPersonForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -100,8 +100,9 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="model\GenSub.cs" />
-    <Compile Include="Person.cs" />
+    <Compile Include="modelAPI\GenSub.cs" />
+    <Compile Include="model\Person.cs" />
+    <Compile Include="model\Subtitle.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Recorder .cs" />

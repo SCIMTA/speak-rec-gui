@@ -49,15 +49,20 @@ namespace SpeakRec
         }
 
 
+
         private void listViewPerson_ItemChecked(object sender, ItemCheckedEventArgs e)
         {
             mainForm.listPerson.Items.Clear();
             ListViewItem itm;
+            string createText = "label,emb\n";
+            File.WriteAllText(@".\speak-rec\data\join.csv", createText);
             foreach (ListViewItem listViewItem in listViewPerson.Items)
             {
                 if (listViewItem.Checked)
                 {
                     itm = (ListViewItem)listViewItem.Clone();
+                    createText += itm.SubItems[1].Text + "," + itm.SubItems[2].Text + "\n";
+                    File.WriteAllText(@".\speak-rec\data\join.csv", createText);
                     mainForm.listPerson.Items.Add(itm);
                 }
             }

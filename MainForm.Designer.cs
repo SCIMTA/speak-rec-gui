@@ -45,6 +45,8 @@ namespace SpeakRec
             this.ListSub = new System.Windows.Forms.ListView();
             this.btnRecord = new System.Windows.Forms.Button();
             this.btnExportText = new System.Windows.Forms.Button();
+            this.tbSub = new System.Windows.Forms.TextBox();
+            this.tbName = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // label1
@@ -137,11 +139,11 @@ namespace SpeakRec
             this.labelFileName.TabIndex = 7;
             this.labelFileName.Text = "Tên file";
             // 
-            // showSub
+            // btnShowSub
             // 
             this.btnShowSub.Enabled = false;
-            this.btnShowSub.Location = new System.Drawing.Point(53, 450);
-            this.btnShowSub.Name = "showSub";
+            this.btnShowSub.Location = new System.Drawing.Point(37, 396);
+            this.btnShowSub.Name = "btnShowSub";
             this.btnShowSub.Size = new System.Drawing.Size(114, 98);
             this.btnShowSub.TabIndex = 10;
             this.btnShowSub.Text = "Xem sub";
@@ -180,11 +182,12 @@ namespace SpeakRec
             // ListSub
             // 
             this.ListSub.HideSelection = false;
-            this.ListSub.Location = new System.Drawing.Point(467, 337);
+            this.ListSub.Location = new System.Drawing.Point(208, 396);
             this.ListSub.Name = "ListSub";
-            this.ListSub.Size = new System.Drawing.Size(794, 342);
+            this.ListSub.Size = new System.Drawing.Size(1053, 283);
             this.ListSub.TabIndex = 15;
             this.ListSub.UseCompatibleStateImageBehavior = false;
+            this.ListSub.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.ListSub_ItemSelectionChanged);
             // 
             // btnRecord
             // 
@@ -198,18 +201,43 @@ namespace SpeakRec
             // 
             // btnExportText
             // 
-            this.btnExportText.Location = new System.Drawing.Point(219, 450);
+            this.btnExportText.Enabled = false;
+            this.btnExportText.Location = new System.Drawing.Point(37, 537);
             this.btnExportText.Name = "btnExportText";
             this.btnExportText.Size = new System.Drawing.Size(114, 98);
             this.btnExportText.TabIndex = 17;
             this.btnExportText.Text = "Xuất văn bản";
             this.btnExportText.UseVisualStyleBackColor = true;
+            this.btnExportText.Click += new System.EventHandler(this.btnExportText_Click);
+            // 
+            // tbSub
+            // 
+            this.tbSub.Enabled = false;
+            this.tbSub.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbSub.Location = new System.Drawing.Point(467, 321);
+            this.tbSub.Multiline = true;
+            this.tbSub.Name = "tbSub";
+            this.tbSub.Size = new System.Drawing.Size(794, 69);
+            this.tbSub.TabIndex = 18;
+            this.tbSub.TextChanged += new System.EventHandler(this.tbSub_TextChanged);
+            // 
+            // tbName
+            // 
+            this.tbName.Enabled = false;
+            this.tbName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbName.Location = new System.Drawing.Point(208, 321);
+            this.tbName.Name = "tbName";
+            this.tbName.Size = new System.Drawing.Size(253, 22);
+            this.tbName.TabIndex = 19;
+            this.tbName.TextChanged += new System.EventHandler(this.tbName_TextChanged);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1264, 681);
+            this.Controls.Add(this.tbName);
+            this.Controls.Add(this.tbSub);
             this.Controls.Add(this.btnExportText);
             this.Controls.Add(this.btnRecord);
             this.Controls.Add(this.ListSub);
@@ -254,6 +282,8 @@ namespace SpeakRec
         private System.Windows.Forms.ListView ListSub;
         private System.Windows.Forms.Button btnRecord;
         private System.Windows.Forms.Button btnExportText;
+        private System.Windows.Forms.TextBox tbSub;
+        private System.Windows.Forms.TextBox tbName;
     }
 }
 

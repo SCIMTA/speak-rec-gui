@@ -36,7 +36,8 @@ namespace SpeakRec
         {
             this.tbName = new System.Windows.Forms.TextBox();
             this.btnRecord = new System.Windows.Forms.Button();
-            this.lablelRec = new System.Windows.Forms.Label();
+            this.labelRec = new System.Windows.Forms.Label();
+            this.btnOpenFile = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // tbName
@@ -51,7 +52,7 @@ namespace SpeakRec
             // btnRecord
             // 
             this.btnRecord.Enabled = false;
-            this.btnRecord.Location = new System.Drawing.Point(135, 108);
+            this.btnRecord.Location = new System.Drawing.Point(12, 108);
             this.btnRecord.Name = "btnRecord";
             this.btnRecord.Size = new System.Drawing.Size(204, 40);
             this.btnRecord.TabIndex = 1;
@@ -59,26 +60,39 @@ namespace SpeakRec
             this.btnRecord.UseVisualStyleBackColor = true;
             this.btnRecord.Click += new System.EventHandler(this.btnRecord_Click);
             // 
-            // lablelRec
+            // labelRec
             // 
-            this.lablelRec.AutoSize = true;
-            this.lablelRec.Location = new System.Drawing.Point(213, 67);
-            this.lablelRec.Name = "lablelRec";
-            this.lablelRec.Size = new System.Drawing.Size(49, 13);
-            this.lablelRec.TabIndex = 4;
-            this.lablelRec.Text = "00:00:00";
+            this.labelRec.AutoSize = true;
+            this.labelRec.Location = new System.Drawing.Point(213, 67);
+            this.labelRec.Name = "labelRec";
+            this.labelRec.Size = new System.Drawing.Size(49, 13);
+            this.labelRec.TabIndex = 4;
+            this.labelRec.Text = "00:00:00";
+            // 
+            // btnOpenFile
+            // 
+            this.btnOpenFile.Enabled = false;
+            this.btnOpenFile.Location = new System.Drawing.Point(245, 108);
+            this.btnOpenFile.Name = "btnOpenFile";
+            this.btnOpenFile.Size = new System.Drawing.Size(204, 40);
+            this.btnOpenFile.TabIndex = 5;
+            this.btnOpenFile.Text = "Mở file";
+            this.btnOpenFile.UseVisualStyleBackColor = true;
+            this.btnOpenFile.Click += new System.EventHandler(this.btnOpenFile_Click);
             // 
             // AddPersonForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(461, 160);
-            this.Controls.Add(this.lablelRec);
+            this.Controls.Add(this.btnOpenFile);
+            this.Controls.Add(this.labelRec);
             this.Controls.Add(this.btnRecord);
             this.Controls.Add(this.tbName);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "AddPersonForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AddPerson";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.AddPersonForm_FormClosed);
             this.ResumeLayout(false);
@@ -90,6 +104,7 @@ namespace SpeakRec
 
         private System.Windows.Forms.TextBox tbName;
         private System.Windows.Forms.Button btnRecord;
-        private System.Windows.Forms.Label lablelRec;
+        private System.Windows.Forms.Label labelRec;
+        private System.Windows.Forms.Button btnOpenFile;
     }
 }

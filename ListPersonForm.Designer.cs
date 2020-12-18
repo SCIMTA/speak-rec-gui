@@ -29,7 +29,11 @@ namespace SpeakRec
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.listViewPerson = new System.Windows.Forms.ListView();
+            this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // listViewPerson
@@ -41,6 +45,22 @@ namespace SpeakRec
             this.listViewPerson.TabIndex = 0;
             this.listViewPerson.UseCompatibleStateImageBehavior = false;
             this.listViewPerson.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.listViewPerson_ItemChecked);
+            this.listViewPerson.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.listViewPerson_ItemSelectionChanged);
+            this.listViewPerson.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listViewPerson_MouseClick);
+            // 
+            // contextMenuStrip
+            // 
+            this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.deleteToolStripMenuItem});
+            this.contextMenuStrip.Name = "contextMenuStrip";
+            this.contextMenuStrip.Size = new System.Drawing.Size(181, 48);
+            // 
+            // xoáToolStripMenuItem
+            // 
+            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.deleteToolStripMenuItem.Text = "Xoá";
+            this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
             // ListPersonForm
             // 
@@ -53,6 +73,7 @@ namespace SpeakRec
             this.Name = "ListPersonForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ListPersonForm";
+            this.contextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -60,5 +81,7 @@ namespace SpeakRec
         #endregion
 
         private System.Windows.Forms.ListView listViewPerson;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
     }
 }

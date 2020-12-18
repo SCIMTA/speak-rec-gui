@@ -61,7 +61,8 @@ namespace SpeakRec
             // 
             // btnOpenFile
             // 
-            this.btnOpenFile.Location = new System.Drawing.Point(37, 49);
+            this.btnOpenFile.Enabled = false;
+            this.btnOpenFile.Location = new System.Drawing.Point(151, 14);
             this.btnOpenFile.Name = "btnOpenFile";
             this.btnOpenFile.Size = new System.Drawing.Size(69, 59);
             this.btnOpenFile.TabIndex = 1;
@@ -73,7 +74,7 @@ namespace SpeakRec
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(12, 132);
+            this.label2.Location = new System.Drawing.Point(323, 7);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(94, 25);
             this.label2.TabIndex = 3;
@@ -82,30 +83,30 @@ namespace SpeakRec
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(32, 189);
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(428, 6);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(76, 25);
+            this.label3.Size = new System.Drawing.Size(60, 20);
             this.label3.TabIndex = 4;
             this.label3.Text = "Tên file";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(32, 226);
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(428, 43);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(108, 25);
+            this.label4.Size = new System.Drawing.Size(88, 20);
             this.label4.TabIndex = 5;
-            this.label4.Text = "Đương dẫn";
+            this.label4.Text = "Đường dẫn";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(32, 262);
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(428, 79);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(154, 25);
+            this.label5.Size = new System.Drawing.Size(126, 20);
             this.label5.TabIndex = 6;
             this.label5.Text = "Độ dài âm thanh";
             // 
@@ -113,7 +114,7 @@ namespace SpeakRec
             // 
             this.labelSoundLength.AutoSize = true;
             this.labelSoundLength.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelSoundLength.Location = new System.Drawing.Point(205, 269);
+            this.labelSoundLength.Location = new System.Drawing.Point(572, 82);
             this.labelSoundLength.Name = "labelSoundLength";
             this.labelSoundLength.Size = new System.Drawing.Size(112, 17);
             this.labelSoundLength.TabIndex = 9;
@@ -123,17 +124,17 @@ namespace SpeakRec
             // 
             this.labelFilePath.AutoSize = true;
             this.labelFilePath.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelFilePath.Location = new System.Drawing.Point(205, 233);
+            this.labelFilePath.Location = new System.Drawing.Point(572, 46);
             this.labelFilePath.Name = "labelFilePath";
             this.labelFilePath.Size = new System.Drawing.Size(78, 17);
             this.labelFilePath.TabIndex = 8;
-            this.labelFilePath.Text = "Đương dẫn";
+            this.labelFilePath.Text = "Đường dẫn";
             // 
             // labelFileName
             // 
             this.labelFileName.AutoSize = true;
             this.labelFileName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelFileName.Location = new System.Drawing.Point(205, 196);
+            this.labelFileName.Location = new System.Drawing.Point(572, 9);
             this.labelFileName.Name = "labelFileName";
             this.labelFileName.Size = new System.Drawing.Size(55, 17);
             this.labelFileName.TabIndex = 7;
@@ -142,9 +143,9 @@ namespace SpeakRec
             // btnShowSub
             // 
             this.btnShowSub.Enabled = false;
-            this.btnShowSub.Location = new System.Drawing.Point(37, 396);
+            this.btnShowSub.Location = new System.Drawing.Point(12, 414);
             this.btnShowSub.Name = "btnShowSub";
-            this.btnShowSub.Size = new System.Drawing.Size(114, 98);
+            this.btnShowSub.Size = new System.Drawing.Size(180, 98);
             this.btnShowSub.TabIndex = 10;
             this.btnShowSub.Text = "Xem sub";
             this.btnShowSub.UseVisualStyleBackColor = true;
@@ -153,15 +154,15 @@ namespace SpeakRec
             // listPerson
             // 
             this.listPerson.HideSelection = false;
-            this.listPerson.Location = new System.Drawing.Point(720, 58);
+            this.listPerson.Location = new System.Drawing.Point(12, 194);
             this.listPerson.Name = "listPerson";
-            this.listPerson.Size = new System.Drawing.Size(532, 229);
+            this.listPerson.Size = new System.Drawing.Size(532, 196);
             this.listPerson.TabIndex = 12;
             this.listPerson.UseCompatibleStateImageBehavior = false;
             // 
             // btnShowListPerson
             // 
-            this.btnShowListPerson.Location = new System.Drawing.Point(1002, 12);
+            this.btnShowListPerson.Location = new System.Drawing.Point(294, 147);
             this.btnShowListPerson.Name = "btnShowListPerson";
             this.btnShowListPerson.Size = new System.Drawing.Size(250, 40);
             this.btnShowListPerson.TabIndex = 14;
@@ -171,7 +172,7 @@ namespace SpeakRec
             // 
             // btnAddPerson
             // 
-            this.btnAddPerson.Location = new System.Drawing.Point(720, 12);
+            this.btnAddPerson.Location = new System.Drawing.Point(12, 148);
             this.btnAddPerson.Name = "btnAddPerson";
             this.btnAddPerson.Size = new System.Drawing.Size(276, 40);
             this.btnAddPerson.TabIndex = 13;
@@ -191,7 +192,8 @@ namespace SpeakRec
             // 
             // btnRecord
             // 
-            this.btnRecord.Location = new System.Drawing.Point(122, 49);
+            this.btnRecord.Enabled = false;
+            this.btnRecord.Location = new System.Drawing.Point(236, 14);
             this.btnRecord.Name = "btnRecord";
             this.btnRecord.Size = new System.Drawing.Size(69, 59);
             this.btnRecord.TabIndex = 16;
@@ -202,9 +204,9 @@ namespace SpeakRec
             // btnExportText
             // 
             this.btnExportText.Enabled = false;
-            this.btnExportText.Location = new System.Drawing.Point(37, 537);
+            this.btnExportText.Location = new System.Drawing.Point(12, 554);
             this.btnExportText.Name = "btnExportText";
-            this.btnExportText.Size = new System.Drawing.Size(114, 98);
+            this.btnExportText.Size = new System.Drawing.Size(180, 98);
             this.btnExportText.TabIndex = 17;
             this.btnExportText.Text = "Xuất văn bản";
             this.btnExportText.UseVisualStyleBackColor = true;
@@ -214,20 +216,20 @@ namespace SpeakRec
             // 
             this.tbSub.Enabled = false;
             this.tbSub.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbSub.Location = new System.Drawing.Point(467, 321);
+            this.tbSub.Location = new System.Drawing.Point(566, 194);
             this.tbSub.Multiline = true;
             this.tbSub.Name = "tbSub";
-            this.tbSub.Size = new System.Drawing.Size(794, 69);
+            this.tbSub.Size = new System.Drawing.Size(695, 196);
             this.tbSub.TabIndex = 18;
             this.tbSub.TextChanged += new System.EventHandler(this.tbSub_TextChanged);
             // 
             // tbName
             // 
             this.tbName.Enabled = false;
-            this.tbName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbName.Location = new System.Drawing.Point(208, 321);
+            this.tbName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbName.Location = new System.Drawing.Point(566, 153);
             this.tbName.Name = "tbName";
-            this.tbName.Size = new System.Drawing.Size(253, 22);
+            this.tbName.Size = new System.Drawing.Size(695, 26);
             this.tbName.TabIndex = 19;
             this.tbName.TextChanged += new System.EventHandler(this.tbName_TextChanged);
             // 
@@ -268,7 +270,7 @@ namespace SpeakRec
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button btnOpenFile;
+        public System.Windows.Forms.Button btnOpenFile;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
@@ -281,7 +283,7 @@ namespace SpeakRec
         private System.Windows.Forms.Button btnShowListPerson;
         private System.Windows.Forms.Button btnAddPerson;
         private System.Windows.Forms.ListView ListSub;
-        private System.Windows.Forms.Button btnRecord;
+        public System.Windows.Forms.Button btnRecord;
         private System.Windows.Forms.Button btnExportText;
         private System.Windows.Forms.TextBox tbSub;
         private System.Windows.Forms.TextBox tbName;

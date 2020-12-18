@@ -30,6 +30,7 @@ namespace SpeakRec
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
+            this.progressBarLoading = new System.Windows.Forms.ProgressBar();
             this.SuspendLayout();
             // 
             // label1
@@ -37,11 +38,18 @@ namespace SpeakRec
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(24, 62);
+            this.label1.Location = new System.Drawing.Point(54, 40);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(279, 24);
+            this.label1.Size = new System.Drawing.Size(227, 24);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Đang tạo phụ đề, vui lòng chờ...";
+            this.label1.Text = "Đang xử lý, vui lòng chờ...";
+            // 
+            // progressBarLoading
+            // 
+            this.progressBarLoading.Location = new System.Drawing.Point(12, 86);
+            this.progressBarLoading.Name = "progressBarLoading";
+            this.progressBarLoading.Size = new System.Drawing.Size(316, 23);
+            this.progressBarLoading.TabIndex = 1;
             // 
             // LoadingForm
             // 
@@ -49,6 +57,7 @@ namespace SpeakRec
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.ClientSize = new System.Drawing.Size(340, 164);
+            this.Controls.Add(this.progressBarLoading);
             this.Controls.Add(this.label1);
             this.ForeColor = System.Drawing.Color.Black;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -63,5 +72,6 @@ namespace SpeakRec
         #endregion
 
         private System.Windows.Forms.Label label1;
+        public System.Windows.Forms.ProgressBar progressBarLoading;
     }
 }

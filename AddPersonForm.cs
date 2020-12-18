@@ -25,12 +25,12 @@ namespace SpeakRec
 
         private void btnRecord_Click(object sender, EventArgs e)
         {
-           if(btnRecord.Text=="Ghi âm")
+            if (btnRecord.Text == "Ghi âm")
             {
                 btnRecord.Text = "Dừng";
                 filePath = ".\\cache\\person\\";
                 fileName = DateTime.Now.Ticks + ".wav";
-                recorder = new Recorder(0, filePath , fileName,lablelRec);
+                recorder = new Recorder(0, filePath, fileName, labelRec);
                 recorder.StartRecording();
             }
             else
@@ -42,24 +42,55 @@ namespace SpeakRec
         private void StopRecord()
         {
             recorder.RecordEnd();
-            API.AddPerson("."+filePath+fileName,tbName.Text);
-            btnRecord.Text = "Ghi âm";
-            tbName.Text = String.Empty;
-            lablelRec.Text = "00:00:00";
+            API.AddPerson("." + filePath + fileName, tbName.Text, json =>
+            {
+                onAddSuccess(json);
+            });
+
         }
 
         private void tbName_TextChanged(object sender, EventArgs e)
         {
-            if(tbName.Text != String.Empty)
+            if (tbName.Text != String.Empty)
+            {
                 btnRecord.Enabled = true;
+                btnOpenFile.Enabled = true;
+            }
             else
+            {
                 btnRecord.Enabled = false;
+                btnOpenFile.Enabled = false;
+            }
         }
 
         private void AddPersonForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            if (btnRecord.Text != "Ghi âm"&&tbName.Text!=String.Empty)
+            if (btnRecord.Text != "Ghi âm" && tbName.Text != String.Empty)
                 StopRecord();
+        }
+
+        private void btnOpenFile_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dlg = new OpenFileDialog();
+            dlg.Title = "Mở file âm thanh";
+            dlg.Filter = "All Media Files|*.wav;*.aac;*.wma;*.wmv;*.mp3;*.mpa;*.mpe;*.cda;*.aif;*.aifc;*.aiff;*.mid;*.midi";
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                this.filePath = dlg.FileName;
+                API.AddPerson(filePath, tbName.Text, json =>
+                {
+                    onAddSuccess(json);
+                });
+            }
+        }
+
+
+        private void onAddSuccess(AddPerson addPerson)
+        {
+            btnRecord.Text = "Ghi âm";
+            tbName.Text = String.Empty;
+            labelRec.Text = "00:00:00";
+            MessageBox.Show("Thêm " + tbName.Text + " thành công");
         }
     }
 }

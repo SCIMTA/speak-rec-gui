@@ -57,19 +57,25 @@ namespace SpeakRec
                         isVideo = true;
                         break;
                     }
-                addSubToListSub(API.GenSub(filePath).path);
-                labelSoundLength.Text = new AudioFileReader(filePath).TotalTime.ToString().Split('.')[0];
-                btnShowSub.Enabled = true;
-                btnExportText.Enabled = true;
+
+                API.GenSub(filePath, json =>
+                {
+                    addSubToListSub(json.path);
+                    labelSoundLength.Text = new AudioFileReader(filePath).TotalTime.ToString().Split('.')[0];
+                    btnShowSub.Enabled = true;
+                    btnExportText.Enabled = true;
+                });
+
             }
         }
+
 
         private void initServer()
         {
             string cmdText = @"/C cd ./speak-rec/ && .\venv\Scripts\uvicorn.exe start_server:app";
             process = new System.Diagnostics.Process();
             System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
-            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Normal;
             startInfo.FileName = "cmd.exe";
             startInfo.Arguments = cmdText;
             process.StartInfo = startInfo;
@@ -153,13 +159,24 @@ namespace SpeakRec
             {
                 string createText = "";
                 foreach (ListViewItem item in ListSub.Items)
-                    createText += item.SubItems[0].Text + ": " + item.SubItems[2].Text + "\n";
+                    createText += item.SubItems[0].Text + ": " + item.SubItems[2].Text + "\n\n";
                 File.WriteAllText(dlg.FileName, createText);
+                System.Diagnostics.Process process = new System.Diagnostics.Process();
+                System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+                startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                startInfo.FileName = "cmd.exe";
+                startInfo.Arguments = @"/K " + dlg.FileName;
+                process.StartInfo = startInfo;
+                process.Start();
             }
         }
 
         private void addSubToListSub(string pathSub = @"C:\Users\hoang\Downloads\Buoc Qua Mua Co Don - Vu.srt")
         {
+            tbName.Enabled = false;
+            tbName.Text = String.Empty;
+            tbSub.Enabled = false;
+            tbSub.Text = String.Empty;
             string text = File.ReadAllText(pathSub);
             ListSub.Items.Clear();
             var arr = text.Split(new string[] { "\n\n" }, StringSplitOptions.None);
@@ -209,17 +226,20 @@ namespace SpeakRec
             ListSub.Items[indexItemSubSelect].SubItems[2].Text = tbSub.Text;
         }
 
-       
+
 
         private void StopRecord()
         {
             recorder.RecordEnd();
-            API.GenSub("." + filePath);
-            addSubToListSub(Path.GetFullPath(filePath.Replace("wav", "srt")));
-            btnShowSub.Enabled = true;
-            btnExportText.Enabled = true;
-            btnOpenFile.Enabled = true;
-            btnRecord.Text = "Ghi âm";
+            API.GenSub("." + filePath, (json) =>
+            {
+                addSubToListSub(Path.GetFullPath(filePath.Replace("wav", "srt")));
+                btnShowSub.Enabled = true;
+                btnExportText.Enabled = true;
+                btnOpenFile.Enabled = true;
+                btnRecord.Text = "Ghi âm";
+            });
+
         }
     }
 }

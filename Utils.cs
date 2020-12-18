@@ -18,7 +18,6 @@ namespace SpeakRec
                 {
                     var line = reader.ReadLine();
                     var values = line.Split(',');
-                    var length = values.Length;
                     if (values[0] != "label")
                     {
                         Person person = new Person(values[0],String.Join(",",values.Skip(1)));
@@ -48,8 +47,12 @@ namespace SpeakRec
             }
             return listPerson;
         }
-        public static void AddJoinPerson(Person person)
+        public static void replaceListPerson(List<Person> listPerson)
         {
+            string createText = "label,emb\n";
+            foreach(Person person in listPerson)
+                createText += person.name + "," + person.featured+ "\n";
+            File.WriteAllText(@".\speak-rec\data\person.csv", createText);
         }
     }
 }

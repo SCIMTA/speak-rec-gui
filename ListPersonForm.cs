@@ -14,6 +14,7 @@ namespace SpeakRec
     public partial class ListPersonForm : Form
     {
         private MainForm mainForm;
+        private int currentItemSelected = -1;
         public ListPersonForm(MainForm mainForm)
         {
             InitializeComponent();
@@ -25,48 +26,82 @@ namespace SpeakRec
             listViewPerson.View = View.Details;
             listViewPerson.GridLines = true;
             listViewPerson.FullRowSelect = true;
-            List<Person> listPerson = Utils.getListPerson();
+            loadListAllPersonSaved();
+        }
 
+        private void loadListAllPersonSaved()
+        {
+            List<Person> listPerson = Utils.getListPerson();
+            listViewPerson.Items.Clear();
             ListViewItem itm;
             for (int i = 0; i < listPerson.Count; i++)
             {
                 itm = new ListViewItem(new string[] {
                 "",listPerson[i].name,listPerson[i].featured });
-                itm.Tag = i;
                 listViewPerson.Items.Add(itm);
             }
-            foreach(ListViewItem item in mainForm.listPerson.Items)
-            {
-                try
-                {
-                    listViewPerson.Items[(int)item.Tag].Checked = true;
-                }
-                catch (Exception)
-                {
-
-                }
-            }
+            foreach (ListViewItem item in mainForm.listPerson.Items)
+                foreach(ListViewItem viewItem in listViewPerson.Items)
+                    if (item.Checked && item.SubItems[2].Text == viewItem.SubItems[2].Text)
+                        viewItem.Checked = true;
         }
 
-
-
         private void listViewPerson_ItemChecked(object sender, ItemCheckedEventArgs e)
+        {
+            reloadForm();
+        }
+
+        private void reloadForm()
         {
             mainForm.listPerson.Items.Clear();
             ListViewItem itm;
             string createText = "label,emb\n";
-            File.WriteAllText(@".\speak-rec\data\join.csv", createText);
             foreach (ListViewItem listViewItem in listViewPerson.Items)
             {
                 if (listViewItem.Checked)
                 {
                     itm = (ListViewItem)listViewItem.Clone();
                     createText += itm.SubItems[1].Text + "," + itm.SubItems[2].Text + "\n";
-                    File.WriteAllText(@".\speak-rec\data\join.csv", createText);
                     mainForm.listPerson.Items.Add(itm);
                 }
             }
+            File.WriteAllText(@".\speak-rec\data\join.csv", createText);
 
+            if (mainForm.listPerson.Items.Count > 0)
+            {
+                mainForm.btnOpenFile.Enabled = true;
+                mainForm.btnRecord.Enabled = true;
+            }
+            else
+            {
+                mainForm.btnOpenFile.Enabled = false;
+                mainForm.btnRecord.Enabled = false;
+            }
+        }
+
+        private void listViewPerson_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                if (listViewPerson.FocusedItem.Bounds.Contains(e.Location))
+                {
+                    contextMenuStrip.Show(Cursor.Position);
+                }
+            }
+        }
+
+        private void listViewPerson_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        {
+            this.currentItemSelected = e.ItemIndex;
+        }
+
+        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            List<Person> listPerson = Utils.getListPerson();
+            listPerson.RemoveAt(currentItemSelected);
+            Utils.replaceListPerson(listPerson);
+            loadListAllPersonSaved();
+            reloadForm();
         }
     }
 }

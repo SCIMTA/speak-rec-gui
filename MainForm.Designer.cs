@@ -29,9 +29,7 @@ namespace SpeakRec
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
             this.btnOpenFile = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -47,22 +45,24 @@ namespace SpeakRec
             this.btnExportText = new System.Windows.Forms.Button();
             this.tbSub = new System.Windows.Forms.TextBox();
             this.tbName = new System.Windows.Forms.TextBox();
+            this.menuMain = new System.Windows.Forms.MenuStrip();
+            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mởFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ghiÂmToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ngườiThamGiaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.thêmNgườiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.danhSáchNgườiThamGiaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.vănBảnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.xemKèmPhụĐềToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.xuấtPhụĐềToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.thoátToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuMain.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(12, 12);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(133, 25);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Âm thanh vào";
             // 
             // btnOpenFile
             // 
             this.btnOpenFile.Enabled = false;
-            this.btnOpenFile.Location = new System.Drawing.Point(151, 14);
+            this.btnOpenFile.Location = new System.Drawing.Point(12, 27);
             this.btnOpenFile.Name = "btnOpenFile";
             this.btnOpenFile.Size = new System.Drawing.Size(69, 59);
             this.btnOpenFile.TabIndex = 1;
@@ -70,21 +70,11 @@ namespace SpeakRec
             this.btnOpenFile.UseVisualStyleBackColor = true;
             this.btnOpenFile.Click += new System.EventHandler(this.btnOpenFile_Click);
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(323, 7);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(94, 25);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Thông tin";
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(428, 6);
+            this.label3.Location = new System.Drawing.Point(562, 29);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(60, 20);
             this.label3.TabIndex = 4;
@@ -94,7 +84,7 @@ namespace SpeakRec
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(428, 43);
+            this.label4.Location = new System.Drawing.Point(562, 66);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(88, 20);
             this.label4.TabIndex = 5;
@@ -104,7 +94,7 @@ namespace SpeakRec
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(428, 79);
+            this.label5.Location = new System.Drawing.Point(562, 105);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(126, 20);
             this.label5.TabIndex = 6;
@@ -114,7 +104,7 @@ namespace SpeakRec
             // 
             this.labelSoundLength.AutoSize = true;
             this.labelSoundLength.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelSoundLength.Location = new System.Drawing.Point(572, 82);
+            this.labelSoundLength.Location = new System.Drawing.Point(704, 105);
             this.labelSoundLength.Name = "labelSoundLength";
             this.labelSoundLength.Size = new System.Drawing.Size(112, 17);
             this.labelSoundLength.TabIndex = 9;
@@ -124,7 +114,7 @@ namespace SpeakRec
             // 
             this.labelFilePath.AutoSize = true;
             this.labelFilePath.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelFilePath.Location = new System.Drawing.Point(572, 46);
+            this.labelFilePath.Location = new System.Drawing.Point(704, 66);
             this.labelFilePath.Name = "labelFilePath";
             this.labelFilePath.Size = new System.Drawing.Size(78, 17);
             this.labelFilePath.TabIndex = 8;
@@ -134,7 +124,7 @@ namespace SpeakRec
             // 
             this.labelFileName.AutoSize = true;
             this.labelFileName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelFileName.Location = new System.Drawing.Point(572, 9);
+            this.labelFileName.Location = new System.Drawing.Point(704, 29);
             this.labelFileName.Name = "labelFileName";
             this.labelFileName.Size = new System.Drawing.Size(55, 17);
             this.labelFileName.TabIndex = 7;
@@ -143,28 +133,28 @@ namespace SpeakRec
             // btnShowSub
             // 
             this.btnShowSub.Enabled = false;
-            this.btnShowSub.Location = new System.Drawing.Point(12, 414);
+            this.btnShowSub.Location = new System.Drawing.Point(12, 396);
             this.btnShowSub.Name = "btnShowSub";
-            this.btnShowSub.Size = new System.Drawing.Size(180, 98);
+            this.btnShowSub.Size = new System.Drawing.Size(190, 147);
             this.btnShowSub.TabIndex = 10;
-            this.btnShowSub.Text = "Xem sub";
+            this.btnShowSub.Text = "Xem kèm phụ đề";
             this.btnShowSub.UseVisualStyleBackColor = true;
             this.btnShowSub.Click += new System.EventHandler(this.showSub_Click);
             // 
             // listPerson
             // 
             this.listPerson.HideSelection = false;
-            this.listPerson.Location = new System.Drawing.Point(12, 194);
+            this.listPerson.Location = new System.Drawing.Point(208, 396);
             this.listPerson.Name = "listPerson";
-            this.listPerson.Size = new System.Drawing.Size(532, 196);
+            this.listPerson.Size = new System.Drawing.Size(352, 283);
             this.listPerson.TabIndex = 12;
             this.listPerson.UseCompatibleStateImageBehavior = false;
             // 
             // btnShowListPerson
             // 
-            this.btnShowListPerson.Location = new System.Drawing.Point(294, 147);
+            this.btnShowListPerson.Location = new System.Drawing.Point(237, 27);
             this.btnShowListPerson.Name = "btnShowListPerson";
-            this.btnShowListPerson.Size = new System.Drawing.Size(250, 40);
+            this.btnShowListPerson.Size = new System.Drawing.Size(69, 59);
             this.btnShowListPerson.TabIndex = 14;
             this.btnShowListPerson.Text = "Danh sách";
             this.btnShowListPerson.UseVisualStyleBackColor = true;
@@ -172,9 +162,9 @@ namespace SpeakRec
             // 
             // btnAddPerson
             // 
-            this.btnAddPerson.Location = new System.Drawing.Point(12, 148);
+            this.btnAddPerson.Location = new System.Drawing.Point(162, 27);
             this.btnAddPerson.Name = "btnAddPerson";
-            this.btnAddPerson.Size = new System.Drawing.Size(276, 40);
+            this.btnAddPerson.Size = new System.Drawing.Size(69, 59);
             this.btnAddPerson.TabIndex = 13;
             this.btnAddPerson.Text = "Thêm người";
             this.btnAddPerson.UseVisualStyleBackColor = true;
@@ -183,9 +173,9 @@ namespace SpeakRec
             // ListSub
             // 
             this.ListSub.HideSelection = false;
-            this.ListSub.Location = new System.Drawing.Point(208, 396);
+            this.ListSub.Location = new System.Drawing.Point(12, 128);
             this.ListSub.Name = "ListSub";
-            this.ListSub.Size = new System.Drawing.Size(1053, 283);
+            this.ListSub.Size = new System.Drawing.Size(1240, 262);
             this.ListSub.TabIndex = 15;
             this.ListSub.UseCompatibleStateImageBehavior = false;
             this.ListSub.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.ListSub_ItemSelectionChanged);
@@ -193,7 +183,7 @@ namespace SpeakRec
             // btnRecord
             // 
             this.btnRecord.Enabled = false;
-            this.btnRecord.Location = new System.Drawing.Point(236, 14);
+            this.btnRecord.Location = new System.Drawing.Point(87, 27);
             this.btnRecord.Name = "btnRecord";
             this.btnRecord.Size = new System.Drawing.Size(69, 59);
             this.btnRecord.TabIndex = 16;
@@ -204,11 +194,11 @@ namespace SpeakRec
             // btnExportText
             // 
             this.btnExportText.Enabled = false;
-            this.btnExportText.Location = new System.Drawing.Point(12, 554);
+            this.btnExportText.Location = new System.Drawing.Point(12, 549);
             this.btnExportText.Name = "btnExportText";
-            this.btnExportText.Size = new System.Drawing.Size(180, 98);
+            this.btnExportText.Size = new System.Drawing.Size(190, 130);
             this.btnExportText.TabIndex = 17;
-            this.btnExportText.Text = "Xuất văn bản";
+            this.btnExportText.Text = "Xuất phụ đề";
             this.btnExportText.UseVisualStyleBackColor = true;
             this.btnExportText.Click += new System.EventHandler(this.btnExportText_Click);
             // 
@@ -216,10 +206,10 @@ namespace SpeakRec
             // 
             this.tbSub.Enabled = false;
             this.tbSub.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbSub.Location = new System.Drawing.Point(566, 194);
+            this.tbSub.Location = new System.Drawing.Point(566, 483);
             this.tbSub.Multiline = true;
             this.tbSub.Name = "tbSub";
-            this.tbSub.Size = new System.Drawing.Size(695, 196);
+            this.tbSub.Size = new System.Drawing.Size(686, 196);
             this.tbSub.TabIndex = 18;
             this.tbSub.TextChanged += new System.EventHandler(this.tbSub_TextChanged);
             // 
@@ -227,11 +217,94 @@ namespace SpeakRec
             // 
             this.tbName.Enabled = false;
             this.tbName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbName.Location = new System.Drawing.Point(566, 153);
+            this.tbName.Location = new System.Drawing.Point(566, 451);
             this.tbName.Name = "tbName";
-            this.tbName.Size = new System.Drawing.Size(695, 26);
+            this.tbName.Size = new System.Drawing.Size(686, 26);
             this.tbName.TabIndex = 19;
             this.tbName.TextChanged += new System.EventHandler(this.tbName_TextChanged);
+            // 
+            // menuMain
+            // 
+            this.menuMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem,
+            this.ngườiThamGiaToolStripMenuItem,
+            this.vănBảnToolStripMenuItem});
+            this.menuMain.Location = new System.Drawing.Point(0, 0);
+            this.menuMain.Name = "menuMain";
+            this.menuMain.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
+            this.menuMain.Size = new System.Drawing.Size(1264, 24);
+            this.menuMain.TabIndex = 20;
+            this.menuMain.Text = "menuStrip1";
+            // 
+            // fileToolStripMenuItem
+            // 
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mởFileToolStripMenuItem,
+            this.ghiÂmToolStripMenuItem,
+            this.thoátToolStripMenuItem});
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Text = "File";
+            // 
+            // mởFileToolStripMenuItem
+            // 
+            this.mởFileToolStripMenuItem.Name = "mởFileToolStripMenuItem";
+            this.mởFileToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.mởFileToolStripMenuItem.Text = "Mở file";
+            // 
+            // ghiÂmToolStripMenuItem
+            // 
+            this.ghiÂmToolStripMenuItem.Name = "ghiÂmToolStripMenuItem";
+            this.ghiÂmToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ghiÂmToolStripMenuItem.Text = "Ghi âm";
+            // 
+            // ngườiThamGiaToolStripMenuItem
+            // 
+            this.ngườiThamGiaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.thêmNgườiToolStripMenuItem,
+            this.danhSáchNgườiThamGiaToolStripMenuItem});
+            this.ngườiThamGiaToolStripMenuItem.Name = "ngườiThamGiaToolStripMenuItem";
+            this.ngườiThamGiaToolStripMenuItem.Size = new System.Drawing.Size(102, 20);
+            this.ngườiThamGiaToolStripMenuItem.Text = "Người tham gia";
+            // 
+            // thêmNgườiToolStripMenuItem
+            // 
+            this.thêmNgườiToolStripMenuItem.Name = "thêmNgườiToolStripMenuItem";
+            this.thêmNgườiToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
+            this.thêmNgườiToolStripMenuItem.Text = "Thêm người";
+            // 
+            // danhSáchNgườiThamGiaToolStripMenuItem
+            // 
+            this.danhSáchNgườiThamGiaToolStripMenuItem.Name = "danhSáchNgườiThamGiaToolStripMenuItem";
+            this.danhSáchNgườiThamGiaToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
+            this.danhSáchNgườiThamGiaToolStripMenuItem.Text = "Danh sách người tham gia";
+            // 
+            // vănBảnToolStripMenuItem
+            // 
+            this.vănBảnToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.xemKèmPhụĐềToolStripMenuItem,
+            this.xuấtPhụĐềToolStripMenuItem});
+            this.vănBảnToolStripMenuItem.Name = "vănBảnToolStripMenuItem";
+            this.vănBảnToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
+            this.vănBảnToolStripMenuItem.Text = "Văn bản";
+            // 
+            // xemKèmPhụĐềToolStripMenuItem
+            // 
+            this.xemKèmPhụĐềToolStripMenuItem.Name = "xemKèmPhụĐềToolStripMenuItem";
+            this.xemKèmPhụĐềToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.xemKèmPhụĐềToolStripMenuItem.Text = "Xem kèm phụ đề";
+            // 
+            // xuấtPhụĐềToolStripMenuItem
+            // 
+            this.xuấtPhụĐềToolStripMenuItem.Name = "xuấtPhụĐềToolStripMenuItem";
+            this.xuấtPhụĐềToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.xuấtPhụĐềToolStripMenuItem.Text = "Xuất phụ đề";
+            // 
+            // thoátToolStripMenuItem
+            // 
+            this.thoátToolStripMenuItem.Name = "thoátToolStripMenuItem";
+            this.thoátToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.thoátToolStripMenuItem.Text = "Thoát";
             // 
             // MainForm
             // 
@@ -253,25 +326,24 @@ namespace SpeakRec
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.btnOpenFile);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.menuMain);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MainMenuStrip = this.menuMain;
             this.MaximizeBox = false;
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "SpeakRec";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
+            this.menuMain.ResumeLayout(false);
+            this.menuMain.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Label label1;
         public System.Windows.Forms.Button btnOpenFile;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
@@ -287,6 +359,17 @@ namespace SpeakRec
         private System.Windows.Forms.Button btnExportText;
         private System.Windows.Forms.TextBox tbSub;
         private System.Windows.Forms.TextBox tbName;
+        private System.Windows.Forms.MenuStrip menuMain;
+        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mởFileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ghiÂmToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ngườiThamGiaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem thêmNgườiToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem danhSáchNgườiThamGiaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem thoátToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem vănBảnToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem xemKèmPhụĐềToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem xuấtPhụĐềToolStripMenuItem;
     }
 }
 

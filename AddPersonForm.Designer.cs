@@ -56,6 +56,7 @@ namespace SpeakRec
             this.btnRecord.Name = "btnRecord";
             this.btnRecord.Size = new System.Drawing.Size(204, 40);
             this.btnRecord.TabIndex = 1;
+            this.btnRecord.Tag = "r";
             this.btnRecord.Text = "Ghi âm";
             this.btnRecord.UseVisualStyleBackColor = true;
             this.btnRecord.Click += new System.EventHandler(this.btnRecord_Click);
@@ -93,7 +94,7 @@ namespace SpeakRec
             this.MaximizeBox = false;
             this.Name = "AddPersonForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "AddPerson";
+            this.Text = "Thêm người mới";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.AddPersonForm_FormClosed);
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -25,9 +25,9 @@ namespace SpeakRec
 
         private void btnRecord_Click(object sender, EventArgs e)
         {
-            if (btnRecord.Text == "Ghi âm")
+            if (btnRecord.Tag.ToString().Equals("r"))
             {
-                btnRecord.Text = "Dừng";
+                btnRecord.Tag = "s";
                 filePath = ".\\cache\\person\\";
                 fileName = DateTime.Now.Ticks + ".wav";
                 recorder = new Recorder(0, filePath, fileName, labelRec);

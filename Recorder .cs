@@ -13,8 +13,18 @@ namespace SpeakRec
         readonly String FilePath;
         readonly String FileName;
         readonly int InputDeviceIndex;
-        Label label;
-        public Recorder(int inputDeviceIndex, String filePath, String fileName,Label label)
+        public delegate void OnRecord(string text);
+        OnRecord onRecord = null;
+        Label label = null;
+        public Recorder(int inputDeviceIndex, String filePath, String fileName, OnRecord onRecord)
+        {
+            this.onRecord = onRecord;
+            this.InputDeviceIndex = inputDeviceIndex;
+            this.FileName = fileName;
+            this.FilePath = filePath;
+        }
+
+        public Recorder(int inputDeviceIndex, String filePath, String fileName, Label label)
         {
             this.label = label;
             this.InputDeviceIndex = inputDeviceIndex;
@@ -45,7 +55,12 @@ namespace SpeakRec
             if (waveWriter == null) return;
             waveWriter.Write(e.Buffer, 0, e.BytesRecorded);
             waveWriter.Flush();
-            label.Text = new TimeSpan(waveWriter.Length*10000 / 32).ToString().Split('.')[0];
+            if (onRecord != null)
+                onRecord(new TimeSpan(waveWriter.Length * 10000 / 32).ToString().Split('.')[0]);
+            else
+            {
+                label.Text = new TimeSpan(waveWriter.Length * 10000 / 32).ToString().Split('.')[0];
+            }
         }
 
         public void RecordEnd()

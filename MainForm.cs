@@ -2,6 +2,7 @@
 using SpeakRec.model;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Threading;
 using System.Windows.Forms;
@@ -29,15 +30,44 @@ namespace SpeakRec
             listPerson.View = View.Details;
             listPerson.GridLines = true;
             listPerson.FullRowSelect = true;
-            ListSub.Columns.Add("Tên", 100);
-            ListSub.Columns.Add("Thời gian", 160);
+            ListSub.Columns.Add("Tên", 125);
+            ListSub.Columns.Add("Thời gian", 225);
             ListSub.Columns.Add("Văn bản", 1000);
             ListSub.View = View.Details;
             ListSub.GridLines = true;
             ListSub.FullRowSelect = true;
             initServer();
+            Utils.disableButton(btnShowSub, Properties.Resources.play,showSubToolStripMenuItem);
+            Utils.disableButton(btnExportText, Properties.Resources.export,exportSubToolStripMenuItem);
+            Utils.disableButton(btnOpenFile, Properties.Resources.open,openFileToolStripMenuItem);
+            Utils.disableButton(btnRecord, Properties.Resources.record,recordToolStripMenuItem);
         }
 
+        private void putTextNameFile()
+        {
+            this.Text = this.fileName + " - " + this.filePath;
+        }
+
+        private void putTextLengthSound(string lengthSound)
+        {
+
+            this.Text = this.fileName + " - " + this.filePath + " - " + lengthSound;
+        }
+
+     
+        public void disableButton()
+        {
+            Utils.disableButton(btnShowSub, Properties.Resources.play,showSubToolStripMenuItem);
+            Utils.disableButton(btnExportText, Properties.Resources.export,exportSubToolStripMenuItem);
+            Utils.disableButton(btnOpenFile, Properties.Resources.open,openFileToolStripMenuItem);
+        }
+
+        public void enableButton()
+        {
+            Utils.enableButton(btnShowSub, Properties.Resources.play, showSubToolStripMenuItem);
+            Utils.enableButton(btnExportText, Properties.Resources.export, exportSubToolStripMenuItem);
+            Utils.enableButton(btnOpenFile, Properties.Resources.open, openFileToolStripMenuItem);
+        }
         private void btnOpenFile_Click(object sender, EventArgs e)
         {
             OpenFileDialog dlg = new OpenFileDialog();
@@ -46,9 +76,8 @@ namespace SpeakRec
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 this.filePath = dlg.FileName;
-                fileName = filePath.Split('\\')[filePath.Split('\\').Length - 1];
-                labelFilePath.Text = filePath;
-                labelFileName.Text = fileName;
+                this.fileName = filePath.Split('\\')[filePath.Split('\\').Length - 1];
+                putTextNameFile();
                 string ext = fileName.Split('.')[1];
                 isVideo = false;
                 foreach (string str in videoFile)
@@ -61,9 +90,10 @@ namespace SpeakRec
                 API.GenSub(filePath, json =>
                 {
                     addSubToListSub(json.path);
-                    labelSoundLength.Text = new AudioFileReader(filePath).TotalTime.ToString().Split('.')[0];
-                    btnShowSub.Enabled = true;
-                    btnExportText.Enabled = true;
+                    putTextLengthSound(new AudioFileReader(filePath).TotalTime.ToString().Split('.')[0]);
+                    //btnShowSub.Enabled = true;
+                    //btnExportText.Enabled = true;
+                    enableButton();
                 });
 
             }
@@ -92,7 +122,7 @@ namespace SpeakRec
                 MessageBox.Show(err.Message);
             }
         }
-        private void showSub_Click(object sender, EventArgs e)
+        private void btnShowSub_Click(object sender, EventArgs e)
         {
             System.Diagnostics.Process process = new System.Diagnostics.Process();
             System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
@@ -121,18 +151,25 @@ namespace SpeakRec
 
         private void btnRecord_Click(object sender, EventArgs e)
         {
-            if (btnRecord.Text == "Ghi âm")
+            if (btnRecord.Tag.ToString().Equals("r"))
             {
-                btnShowSub.Enabled = false;
-                btnExportText.Enabled = false;
-                btnOpenFile.Enabled = false;
-                btnRecord.Text = "Dừng";
-                filePath = ".\\cache\\meeting\\";
-                fileName = DateTime.Now.Ticks + ".wav";
-                recorder = new Recorder(0, filePath, fileName, labelSoundLength);
+                //btnShowSub.Enabled = false;
+                //btnExportText.Enabled = false;
+                //btnOpenFile.Enabled = false;
+
+                disableButton();
+
+
+                btnRecord.Tag = "s";
+                btnRecord.BackgroundImage = Properties.Resources.stop;
+                this.filePath = ".\\cache\\meeting\\";
+                this.fileName = DateTime.Now.Ticks + ".wav";
+                recorder = new Recorder(0, filePath, fileName, (text) =>
+                {
+                    putTextLengthSound(text);
+                });
                 recorder.StartRecording();
-                labelFilePath.Text = filePath;
-                labelFileName.Text = fileName;
+                putTextNameFile();
                 this.filePath = filePath + fileName;
                 string ext = fileName.Split('.')[1];
                 isVideo = false;
@@ -189,8 +226,8 @@ namespace SpeakRec
                     var textItem = subArr[2];
                     if (subArr[2].Split(':').Length > 1)
                     {
-                        nameItem = subArr[2].Split(':')[0];
-                        textItem = subArr[2].Split(':')[1];
+                        nameItem = subArr[2].Split(':')[0].Trim();
+                        textItem = subArr[2].Split(':')[1].Trim();
                     }
                     ListViewItem itm = new ListViewItem(new string[] {
                     nameItem, subArr[1], textItem
@@ -226,18 +263,23 @@ namespace SpeakRec
             ListSub.Items[indexItemSubSelect].SubItems[2].Text = tbSub.Text;
         }
 
-
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
 
         private void StopRecord()
         {
+            btnRecord.Tag = "r";
             recorder.RecordEnd();
-            API.GenSub("." + filePath, (json) =>
+            API.GenSub("." + this.filePath, (json) =>
             {
                 addSubToListSub(Path.GetFullPath(filePath.Replace("wav", "srt")));
-                btnShowSub.Enabled = true;
-                btnExportText.Enabled = true;
-                btnOpenFile.Enabled = true;
-                btnRecord.Text = "Ghi âm";
+                //btnShowSub.Enabled = true;
+                //btnExportText.Enabled = true;
+                //btnOpenFile.Enabled = true;
+                enableButton();
+                btnRecord.BackgroundImage = Properties.Resources.record;
             });
 
         }

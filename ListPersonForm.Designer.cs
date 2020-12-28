@@ -38,6 +38,7 @@ namespace SpeakRec
             // 
             // listViewPerson
             // 
+            this.listViewPerson.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.listViewPerson.HideSelection = false;
             this.listViewPerson.Location = new System.Drawing.Point(12, 12);
             this.listViewPerson.Name = "listViewPerson";
@@ -53,12 +54,12 @@ namespace SpeakRec
             this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.deleteToolStripMenuItem});
             this.contextMenuStrip.Name = "contextMenuStrip";
-            this.contextMenuStrip.Size = new System.Drawing.Size(181, 48);
+            this.contextMenuStrip.Size = new System.Drawing.Size(95, 26);
             // 
-            // xoáToolStripMenuItem
+            // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(94, 22);
             this.deleteToolStripMenuItem.Text = "Xoá";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
@@ -72,7 +73,7 @@ namespace SpeakRec
             this.MaximizeBox = false;
             this.Name = "ListPersonForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "ListPersonForm";
+            this.Text = "Danh sách";
             this.contextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
 

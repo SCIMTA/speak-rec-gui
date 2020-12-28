@@ -162,5 +162,16 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="asset\add.png" />
+    <Content Include="asset\export.png" />
+    <Content Include="asset\list.png" />
+    <Content Include="asset\meeting.png" />
+    <Content Include="asset\open.png" />
+    <Content Include="asset\play.png" />
+    <Content Include="asset\record.png" />
+    <Content Include="asset\stop.png" />
+    <None Include="Resources\play.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

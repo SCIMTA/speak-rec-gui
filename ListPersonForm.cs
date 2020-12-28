@@ -69,13 +69,17 @@ namespace SpeakRec
 
             if (mainForm.listPerson.Items.Count > 0)
             {
-                mainForm.btnOpenFile.Enabled = true;
-                mainForm.btnRecord.Enabled = true;
+                //mainForm.btnOpenFile.Enabled = true;
+                //mainForm.btnRecord.Enabled = true;
+                Utils.enableButton(mainForm.btnRecord, Properties.Resources.record,mainForm.recordToolStripMenuItem);
+                Utils.enableButton(mainForm.btnOpenFile, Properties.Resources.open,mainForm.openFileToolStripMenuItem);
             }
             else
             {
-                mainForm.btnOpenFile.Enabled = false;
-                mainForm.btnRecord.Enabled = false;
+                //mainForm.btnOpenFile.Enabled = false;
+                //mainForm.btnRecord.Enabled = false;
+                Utils.disableButton(mainForm.btnRecord, Properties.Resources.record,mainForm.recordToolStripMenuItem);
+                Utils.disableButton(mainForm.btnOpenFile, Properties.Resources.open,mainForm.openFileToolStripMenuItem);
             }
         }
 

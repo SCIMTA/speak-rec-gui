@@ -14,12 +14,10 @@ namespace SpeakRec
     {
         public Recorder recorder;
         public string placeholder = "Nhập tên";
-        private MainForm mainForm;
         private string filePath;
         private string fileName;
-        public AddPersonForm(MainForm mainForm)
+        public AddPersonForm()
         {
-            this.mainForm = mainForm;
             InitializeComponent();
         }
 

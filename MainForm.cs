@@ -26,7 +26,6 @@ namespace SpeakRec
             InitializeComponent();
             listPerson.Columns.Add("", 0);
             listPerson.Columns.Add("Tên", 300);
-            listPerson.Columns.Add("Đặc trưng", 500);
             listPerson.View = View.Details;
             listPerson.GridLines = true;
             listPerson.FullRowSelect = true;
@@ -144,11 +143,6 @@ namespace SpeakRec
             new ListPersonForm(this).ShowDialog();
         }
 
-        private void btnAddPerson_Click(object sender, EventArgs e)
-        {
-            new AddPersonForm(this).ShowDialog();
-        }
-
         private void btnRecord_Click(object sender, EventArgs e)
         {
             if (btnRecord.Tag.ToString().Equals("r"))
@@ -234,7 +228,7 @@ namespace SpeakRec
                 });
                     ListSub.Items.Add(itm);
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
 
                 }
@@ -266,6 +260,11 @@ namespace SpeakRec
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void managerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new ManagerForm().ShowDialog();
         }
 
         private void StopRecord()

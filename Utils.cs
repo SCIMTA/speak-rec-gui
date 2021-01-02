@@ -22,7 +22,7 @@ namespace SpeakRec
                     var values = line.Split(',');
                     if (values[0] != "label")
                     {
-                        Person person = new Person(values[0], String.Join(",", values.Skip(1)));
+                        Person person = new Person(values[0]);
                         listPerson.Add(person);
                     }
                 }
@@ -42,7 +42,7 @@ namespace SpeakRec
                     var length = values.Length;
                     if (values[0] != "label")
                     {
-                        Person person = new Person(values[0], String.Join(",", values.Skip(1)));
+                        Person person = new Person(values[0]);
                         listPerson.Add(person);
                     }
                 }
@@ -53,7 +53,7 @@ namespace SpeakRec
         {
             string createText = "label,emb\n";
             foreach (Person person in listPerson)
-                createText += person.name + "," + person.featured + "\n";
+                createText += person.name + "\n";
             File.WriteAllText(@".\speak-rec\data\person.csv", createText);
         }
 

@@ -21,8 +21,7 @@ namespace SpeakRec
             this.mainForm = mainForm;
             listViewPerson.CheckBoxes = true;
             listViewPerson.Columns.Add("Tham gia", 100);
-            listViewPerson.Columns.Add("Tên", 300);
-            listViewPerson.Columns.Add("Đặc trưng", 500);
+            listViewPerson.Columns.Add("Tên", 500);
             listViewPerson.View = View.Details;
             listViewPerson.GridLines = true;
             listViewPerson.FullRowSelect = true;
@@ -37,12 +36,12 @@ namespace SpeakRec
             for (int i = 0; i < listPerson.Count; i++)
             {
                 itm = new ListViewItem(new string[] {
-                "",listPerson[i].name,listPerson[i].featured });
+                "",listPerson[i].name });
                 listViewPerson.Items.Add(itm);
             }
             foreach (ListViewItem item in mainForm.listPerson.Items)
-                foreach(ListViewItem viewItem in listViewPerson.Items)
-                    if (item.Checked && item.SubItems[2].Text == viewItem.SubItems[2].Text)
+                foreach (ListViewItem viewItem in listViewPerson.Items)
+                    if (item.Checked && item.SubItems[1].Text == viewItem.SubItems[1].Text)
                         viewItem.Checked = true;
         }
 
@@ -55,13 +54,13 @@ namespace SpeakRec
         {
             mainForm.listPerson.Items.Clear();
             ListViewItem itm;
-            string createText = "label,emb\n";
+            string createText = "label\n";
             foreach (ListViewItem listViewItem in listViewPerson.Items)
             {
                 if (listViewItem.Checked)
                 {
                     itm = (ListViewItem)listViewItem.Clone();
-                    createText += itm.SubItems[1].Text + "," + itm.SubItems[2].Text + "\n";
+                    createText += itm.SubItems[1].Text + "\n";
                     mainForm.listPerson.Items.Add(itm);
                 }
             }
@@ -69,17 +68,13 @@ namespace SpeakRec
 
             if (mainForm.listPerson.Items.Count > 0)
             {
-                //mainForm.btnOpenFile.Enabled = true;
-                //mainForm.btnRecord.Enabled = true;
-                Utils.enableButton(mainForm.btnRecord, Properties.Resources.record,mainForm.recordToolStripMenuItem);
-                Utils.enableButton(mainForm.btnOpenFile, Properties.Resources.open,mainForm.openFileToolStripMenuItem);
+                Utils.enableButton(mainForm.btnRecord, Properties.Resources.record, mainForm.recordToolStripMenuItem);
+                Utils.enableButton(mainForm.btnOpenFile, Properties.Resources.open, mainForm.openFileToolStripMenuItem);
             }
             else
             {
-                //mainForm.btnOpenFile.Enabled = false;
-                //mainForm.btnRecord.Enabled = false;
-                Utils.disableButton(mainForm.btnRecord, Properties.Resources.record,mainForm.recordToolStripMenuItem);
-                Utils.disableButton(mainForm.btnOpenFile, Properties.Resources.open,mainForm.openFileToolStripMenuItem);
+                Utils.disableButton(mainForm.btnRecord, Properties.Resources.record, mainForm.recordToolStripMenuItem);
+                Utils.disableButton(mainForm.btnOpenFile, Properties.Resources.open, mainForm.openFileToolStripMenuItem);
             }
         }
 

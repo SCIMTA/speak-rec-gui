@@ -8,10 +8,9 @@ namespace SpeakRec
 {
     class Person
     {
-        public string name, featured;
-        public Person(string name,string featured) {
+        public string name;
+        public Person(string name) {
             this.name = name;
-            this.featured = featured;
         }
     }
 }

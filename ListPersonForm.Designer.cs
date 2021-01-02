@@ -40,9 +40,11 @@ namespace SpeakRec
             // 
             this.listViewPerson.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.listViewPerson.HideSelection = false;
-            this.listViewPerson.Location = new System.Drawing.Point(12, 12);
+            this.listViewPerson.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.listViewPerson.Location = new System.Drawing.Point(16, 15);
+            this.listViewPerson.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.listViewPerson.Name = "listViewPerson";
-            this.listViewPerson.Size = new System.Drawing.Size(776, 426);
+            this.listViewPerson.Size = new System.Drawing.Size(1033, 523);
             this.listViewPerson.TabIndex = 0;
             this.listViewPerson.UseCompatibleStateImageBehavior = false;
             this.listViewPerson.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.listViewPerson_ItemChecked);
@@ -51,25 +53,27 @@ namespace SpeakRec
             // 
             // contextMenuStrip
             // 
+            this.contextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.deleteToolStripMenuItem});
             this.contextMenuStrip.Name = "contextMenuStrip";
-            this.contextMenuStrip.Size = new System.Drawing.Size(95, 26);
+            this.contextMenuStrip.Size = new System.Drawing.Size(105, 28);
             // 
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(94, 22);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(104, 24);
             this.deleteToolStripMenuItem.Text = "Xoá";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
             // ListPersonForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1067, 554);
             this.Controls.Add(this.listViewPerson);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MaximizeBox = false;
             this.Name = "ListPersonForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

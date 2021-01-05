@@ -107,6 +107,7 @@
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="modelAPI\GenSub.cs" />
+    <Compile Include="modelAPI\ListPerson.cs" />
     <Compile Include="model\Person.cs" />
     <Compile Include="model\Subtitle.cs" />
     <Compile Include="Program.cs" />

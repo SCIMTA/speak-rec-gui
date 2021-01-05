@@ -1,14 +1,10 @@
 ﻿using Newtonsoft.Json.Linq;
 using RestSharp;
 using SpeakRec.model;
+using SpeakRec.modelAPI;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SpeakRec
@@ -19,6 +15,9 @@ namespace SpeakRec
         public delegate void CallBack(JObject json);
         public delegate void CallBackGenSub(GenSub json);
         public delegate void CallBackAddPerson(AddPerson json);
+        public delegate void CallBackGetListPerson(ListPerson listPerson);
+        public delegate void CallBackEditJoin();
+        public delegate void CallBackRemovePerson();
 
         public static void AddPerson(string audio, string label, CallBackAddPerson callBack)
         {
@@ -41,11 +40,46 @@ namespace SpeakRec
             });
         }
 
+
+        public static void GetListPerson(CallBackGetListPerson callback)
+        {
+            callApiGet("get_list_person", json =>
+            {
+                callback(json.ToObject<ListPerson>());
+            });
+        }
+
+        public static void GetListJoin(CallBackGetListPerson callback)
+        {
+            callApiGet("get_list_join", json =>
+            {
+                callback(json.ToObject<ListPerson>());
+            });
+        }
+
+        public static void EditJoin(string label,bool isCheck, CallBackEditJoin callback)
+        {
+            JObject body = new JObject();
+            body.Add("label", label);
+            body.Add("is_check", isCheck);
+            callApiPost("edit_join", body, json =>
+             {
+                 callback();
+             }, false);
+        }
+        public static void RemovePerson(string label, CallBackRemovePerson callback)
+        {
+            JObject body = new JObject();
+            body.Add("label", label);
+            callApiPost("remove_person", body, json =>
+            {
+                callback();
+            }, false);
+        }
         private static LoadingForm loadingForm;
         private static Thread thread;
-        private static void callApiPost(string path, JObject body, CallBack callBack)
+        private static void callApiPost(string path, JObject body, CallBack callBack, bool isShowLoading = true)
         {
-            JObject json;
             thread = new Thread(() =>
             {
                 var client = new RestClient(baseUrl + path);
@@ -54,8 +88,48 @@ namespace SpeakRec
                 request.AddHeader("Content-Type", "application/json");
                 request.AddParameter("application/json", body, ParameterType.RequestBody);
                 IRestResponse response = client.Execute(request);
+                onCallDone(response, callBack, isShowLoading);
+            });
+            thread.Start();
+
+            if (isShowLoading)
+            {
+                loadingForm = new LoadingForm();
+                loadingForm.progressBarLoading.Minimum = 0;
+                loadingForm.progressBarLoading.Maximum = 1000000;
+                for (int i = 0; i <= 800000; i++)
+                    loadingForm.progressBarLoading.Value = i;
+                loadingForm.ShowDialog();
+            }
+
+        }
+        private static void callApiGet(string path, CallBack callBack,bool isShowLoading=true)
+        {
+            thread = new Thread(() =>
+            {
+                var client = new RestClient(baseUrl + path);
+                client.Timeout = -1;
+                var request = new RestRequest(Method.GET);
+                request.AddHeader("Content-Type", "application/json");
+                IRestResponse response = client.Execute(request);
+                onCallDone(response, callBack, isShowLoading);
+            });
+            thread.Start();
+            loadingForm = new LoadingForm();
+            loadingForm.progressBarLoading.Minimum = 0;
+            loadingForm.progressBarLoading.Maximum = 1000000;
+            for (int i = 0; i <= 800000; i++)
+                loadingForm.progressBarLoading.Value = i;
+            loadingForm.ShowDialog();
+
+        }
+
+        private static void onCallDone(IRestResponse response, CallBack callBack, bool isShowLoading)
+        {
+            if (isShowLoading)
                 try
                 {
+                    JObject json;
                     if (loadingForm.InvokeRequired)
                         loadingForm.Invoke(new MethodInvoker(delegate
                         {
@@ -69,22 +143,30 @@ namespace SpeakRec
                             json = JObject.Parse(response.Content);
                             callBack(json);
                         }));
+                    else
+                    {
+                        Thread.Sleep(1);
+                        onCallDone(response, callBack, isShowLoading);
+                        return;
+                    }
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show(e.Message);
+                    //MessageBox.Show(e.Message);
                 }
-
-            });
-            thread.Start();
-            loadingForm = new LoadingForm();
-            loadingForm.progressBarLoading.Minimum = 0;
-            loadingForm.progressBarLoading.Maximum = 1000000;
-            for (int i = 0; i <= 800000; i++)
-                loadingForm.progressBarLoading.Value = i;
-            loadingForm.ShowDialog();
-            
+            else
+            {
+                try
+                {
+                    JObject json;
+                    json = JObject.Parse(response.Content);
+                    callBack(json);
+                }
+                catch (Exception e)
+                {
+                    //MessageBox.Show(e.Message);
+                }
+            }
         }
-
     }
 }

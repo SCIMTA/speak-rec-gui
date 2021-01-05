@@ -1,10 +1,7 @@
 ﻿using NAudio.Wave;
-using SpeakRec.model;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.IO;
-using System.Threading;
 using System.Windows.Forms;
 
 namespace SpeakRec
@@ -36,10 +33,37 @@ namespace SpeakRec
             ListSub.GridLines = true;
             ListSub.FullRowSelect = true;
             initServer();
-            Utils.disableButton(btnShowSub, Properties.Resources.play,showSubToolStripMenuItem);
-            Utils.disableButton(btnExportText, Properties.Resources.export,exportSubToolStripMenuItem);
-            Utils.disableButton(btnOpenFile, Properties.Resources.open,openFileToolStripMenuItem);
-            Utils.disableButton(btnRecord, Properties.Resources.record,recordToolStripMenuItem);
+            Utils.disableButton(btnShowSub, Properties.Resources.play, showSubToolStripMenuItem);
+            Utils.disableButton(btnExportText, Properties.Resources.export, exportSubToolStripMenuItem);
+            Utils.disableButton(btnOpenFile, Properties.Resources.open, openFileToolStripMenuItem);
+            Utils.disableButton(btnRecord, Properties.Resources.record, recordToolStripMenuItem);
+        }
+
+        public void loadListJoin()
+        {
+            API.GetListJoin(resJoin =>
+            {
+                List<Person> listJoin = resJoin.data;
+                listPerson.Items.Clear();
+                ListViewItem itm;
+                for (int i = 0; i < listJoin.Count; i++)
+                {
+                    itm = new ListViewItem(new string[] {
+                "",listJoin[i].name });
+                    listPerson.Items.Add(itm);
+                }
+                if (listPerson.Items.Count > 0)
+                {
+                    Utils.enableButton(btnRecord, Properties.Resources.record, recordToolStripMenuItem);
+                    Utils.enableButton(btnOpenFile, Properties.Resources.open, openFileToolStripMenuItem);
+                }
+                else
+                {
+                    Utils.disableButton(btnRecord, Properties.Resources.record, recordToolStripMenuItem);
+                    Utils.disableButton(btnOpenFile, Properties.Resources.open, openFileToolStripMenuItem);
+                }
+            });
+
         }
 
         private void putTextNameFile()
@@ -53,12 +77,12 @@ namespace SpeakRec
             this.Text = this.fileName + " - " + this.filePath + " - " + lengthSound;
         }
 
-     
+
         public void disableButton()
         {
-            Utils.disableButton(btnShowSub, Properties.Resources.play,showSubToolStripMenuItem);
-            Utils.disableButton(btnExportText, Properties.Resources.export,exportSubToolStripMenuItem);
-            Utils.disableButton(btnOpenFile, Properties.Resources.open,openFileToolStripMenuItem);
+            Utils.disableButton(btnShowSub, Properties.Resources.play, showSubToolStripMenuItem);
+            Utils.disableButton(btnExportText, Properties.Resources.export, exportSubToolStripMenuItem);
+            Utils.disableButton(btnOpenFile, Properties.Resources.open, openFileToolStripMenuItem);
         }
 
         public void enableButton()
@@ -90,8 +114,6 @@ namespace SpeakRec
                 {
                     addSubToListSub(json.path);
                     putTextLengthSound(new AudioFileReader(filePath).TotalTime.ToString().Split('.')[0]);
-                    //btnShowSub.Enabled = true;
-                    //btnExportText.Enabled = true;
                     enableButton();
                 });
 
@@ -147,13 +169,7 @@ namespace SpeakRec
         {
             if (btnRecord.Tag.ToString().Equals("r"))
             {
-                //btnShowSub.Enabled = false;
-                //btnExportText.Enabled = false;
-                //btnOpenFile.Enabled = false;
-
                 disableButton();
-
-
                 btnRecord.Tag = "s";
                 btnRecord.BackgroundImage = Properties.Resources.stop;
                 this.filePath = ".\\cache\\meeting\\";
@@ -264,7 +280,7 @@ namespace SpeakRec
 
         private void managerToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new ManagerForm().ShowDialog();
+            new ManagerForm(this).ShowDialog();
         }
 
         private void StopRecord()
@@ -274,13 +290,9 @@ namespace SpeakRec
             API.GenSub("." + this.filePath, (json) =>
             {
                 addSubToListSub(Path.GetFullPath(filePath.Replace("wav", "srt")));
-                //btnShowSub.Enabled = true;
-                //btnExportText.Enabled = true;
-                //btnOpenFile.Enabled = true;
                 enableButton();
                 btnRecord.BackgroundImage = Properties.Resources.record;
             });
-
         }
     }
 }

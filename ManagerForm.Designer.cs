@@ -29,19 +29,25 @@ namespace SpeakRec
         /// </summary>
         private void InitializeComponent()
         {
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.components = new System.ComponentModel.Container();
+            this.listPersonManager = new System.Windows.Forms.ListView();
             this.button1 = new System.Windows.Forms.Button();
+            this.contextMenuDelete = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.xoáToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuDelete.SuspendLayout();
             this.SuspendLayout();
             // 
-            // listView1
+            // listPersonManager
             // 
-            this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(9, 48);
-            this.listView1.Margin = new System.Windows.Forms.Padding(2);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(583, 309);
-            this.listView1.TabIndex = 0;
-            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listPersonManager.HideSelection = false;
+            this.listPersonManager.Location = new System.Drawing.Point(9, 48);
+            this.listPersonManager.Margin = new System.Windows.Forms.Padding(2);
+            this.listPersonManager.Name = "listPersonManager";
+            this.listPersonManager.Size = new System.Drawing.Size(583, 309);
+            this.listPersonManager.TabIndex = 0;
+            this.listPersonManager.UseCompatibleStateImageBehavior = false;
+            this.listPersonManager.SelectedIndexChanged += new System.EventHandler(this.listPersonManager_SelectedIndexChanged);
+            this.listPersonManager.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listPersonManager_MouseDown);
             // 
             // button1
             // 
@@ -53,23 +59,42 @@ namespace SpeakRec
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.addPersonBtn);
             // 
+            // contextMenuDelete
+            // 
+            this.contextMenuDelete.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.xoáToolStripMenuItem});
+            this.contextMenuDelete.Name = "contextMenuDelete";
+            this.contextMenuDelete.Size = new System.Drawing.Size(95, 26);
+            // 
+            // xoáToolStripMenuItem
+            // 
+            this.xoáToolStripMenuItem.Name = "xoáToolStripMenuItem";
+            this.xoáToolStripMenuItem.Size = new System.Drawing.Size(94, 22);
+            this.xoáToolStripMenuItem.Text = "Xoá";
+            this.xoáToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
+            // 
             // ManagerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(600, 366);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.listView1);
+            this.Controls.Add(this.listPersonManager);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "ManagerForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Quản trị";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ManagerForm_FormClosing);
+            this.contextMenuDelete.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ListView listPersonManager;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ContextMenuStrip contextMenuDelete;
+        private System.Windows.Forms.ToolStripMenuItem xoáToolStripMenuItem;
     }
 }

@@ -137,6 +137,7 @@ namespace SpeakRec
             try
             {
                 process.CloseMainWindow();
+                API.ClearJoin(() => { });
             }
             catch (Exception err)
             {

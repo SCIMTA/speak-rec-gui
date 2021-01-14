@@ -67,6 +67,16 @@ namespace SpeakRec
                  callback();
              }, false);
         }
+
+        public static void ClearJoin(CallBackEditJoin callback)
+        {
+            JObject body = new JObject();
+            callApiPost("clear_join", body, json =>
+            {
+                callback();
+            }, false);
+        }
+
         public static void RemovePerson(string label, CallBackRemovePerson callback)
         {
             JObject body = new JObject();
